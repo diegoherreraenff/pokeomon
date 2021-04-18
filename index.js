@@ -1,98 +1,114 @@
 function setup() {
+    const body = document.querySelector("body")
+    const div = document.getElementById("div")
     const btnBuscar = document.getElementById("btnBuscar")
     const query = document.getElementById("input")
-
-    var kvArray = [{ clave: 1, valor: 10 },
-    { clave: 2, valor: 20 },
-    { clave: 3, valor: 30 }];
-
-    var reformattedArray = kvArray.map(function (obj) {
-        var rObj = {};
-        rObj[obj.clave] = obj.valor;
-        return rObj;
-    })git;
+    const remove = document.querySelectorAll("div")
+    const ul = document.createElement("ul")
+    body.appendChild(query)
+    body.appendChild(btnBuscar)
 
 
     btnBuscar.addEventListener("click", event => {
+        const limpia = document.getElementById("div")
+        limpia.innerHTML="";
         event.preventDefault()
+
+
+
         const buscarPokemon = query.value
         fetch(`https://pokeapi.co/api/v2/pokemon/${buscarPokemon}`)
             .then(response => response.json())
 
             .then(data => {
-                const div = document.getElementById("div")
-                const p = document.createElement("p")
+
+                //ability 
+
+
                 console.log(data)
-                console.log(data.name)
-                console.log (typeof data.abilities) 
-                const abilitiesName = data.abilities
-                names= abilitiesName.forEach(element => {
-                    console.log(element.ability[0])
-                    
-                });
-                 console.log (typeof names)
-                
+                const div = document.getElementById("div")
+                div.appendChild(ul)
 
+                data.abilities.map(element => element.ability.name)
+                    .forEach(ability => {
+                        const li = document.createElement("li")
+                        li.innerText = ability
+                        ul.appendChild(li)
 
+                    });
 
-                /* const ability1 = data.abilities[0].ability.name
-                const ability2 = data.abilities[1].ability.name
-                const totalHability = "las habilidad es son " + ability1 +  "y " + ability2
-                div.appendChild(p)
-                p.innerText = totalHability
-                console.log(totalHability)
-                const habilidad = data.abilities[0].ability
-                console.log (typeof habilidad)
- */
+                // imagenes
 
+                const imagen = document.createElement("img")
+                div.appendChild(imagen)
+                imagen.style.width = "200px"
 
-
-
-
-
-
-
-                /* let perro = {
-                    nombre: "Scott",
-                    color: "Negro",
-                    macho: true,
-                    edad: 5
-                  };
-                  
-                  let valores = Object.values(perro); // valores = ["Scott", "Negro", true, 5];
-                  for(let i=0; i< valores.length; i++){
-                    console.log(valores[i]);
-                  }
-                 */
+                const dataSpeites = Object.values(data.sprites).filter(element => {
+                    if (typeof element === typeof "") {
+                        return element
+                    }
+                })
 
 
 
 
+                console.log(dataSpeites)
+                let index = 0
+                setInterval(() => {
+                    if (index == dataSpeites.length) {
+                        index = 0
+                    }
+                    imagen.src = dataSpeites[index]
+                    index += 1
 
-            });
+                }, 400)
 
 
+
+                //datos
+
+
+
+                const divStats = document.getElementById("div")
+                const ulStats = document.createElement("ul")
+
+
+                const estadistica = data.stats
+                estadistica.forEach(element => {
+                    const liStats = document.createElement("li")
+                    body.appendChild(divStats)
+                    divStats.appendChild(ulStats)
+                    ulStats.appendChild(liStats)
+                    let result = `${element.stat.name}:${element.base_stat}`
+                    liStats.innerText = result
+
+                })
+
+                // tipos
+                const type = data.types
+                type.forEach(element => {
+                    const div = document.getElementById("div")
+                    //const body = document.getElementById("body")
+                    let result = `${element.type.name}`
+                    const h2Type = document.createElement("h2")
+                    div.appendChild(h2Type)
+                    h2Type.innerText = `the type element is : ${result}`
+                })
+
+
+
+            }
+
+
+
+
+            )
     }
 
 
     )
+
 }
-
-
-
-/* const object = { a: 1, b: 2, c: 3 };
-
-for (const property in object) {
-    console.log(`${property}: ${object[property]}`);
-} */
-
-
-
-
-
-
-
-
 
 
 
