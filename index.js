@@ -8,6 +8,8 @@ function setup() {
     body.appendChild(query)
     body.appendChild(btnBuscar)
 
+    
+
 
     btnBuscar.addEventListener("click", event => {
         const limpia = document.getElementById("div")
@@ -37,9 +39,15 @@ function setup() {
 
                     });
 
+                    
+
                 // imagenes
 
                 const imagen = document.createElement("img")
+                imagen.style = "rounded"
+                imagen.style.border = "solid"
+                imagen.style.backgroundColor= "#464552"
+                imagen.style.borderColor = "red"
                 div.appendChild(imagen)
                 imagen.style.width = "200px"
 

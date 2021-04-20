@@ -1,7 +1,17 @@
 body {
 
-    background-image:  url(https://img.rankedboost.com/wp-content/uploads/2016/07/Pokemon-Go-Pok%C3%A9dex.png);
+    background-image:url("./imagen/-WHKwd1i_400x400.jpg") ;
     background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
     
 
 }
+
+.container-fluid {
+    display: flex; /* or inline-flex */
+    flex-direction: inherit;
+    border-block: 30px;
+    width: 50%;
+    height: 300px;
+  }
